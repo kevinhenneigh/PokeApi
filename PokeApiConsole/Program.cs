@@ -27,10 +27,6 @@ namespace PokeApiConsole
             {
                 Console.WriteLine("Please try again later");
             }
-            
-
-            
-
             Console.ReadKey();
         }
     }
