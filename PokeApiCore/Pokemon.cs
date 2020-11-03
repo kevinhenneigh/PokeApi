@@ -7,7 +7,7 @@ namespace PokeApiCore
 
     public class Pokemon
     {
-        private const double InchesPerDecimeter = 3.397;
+        private const double InchesPerDecimeter = 3.937;
         private const double PoundsPerHectogram = 0.22046;
         private int height1;
         private int _weight;

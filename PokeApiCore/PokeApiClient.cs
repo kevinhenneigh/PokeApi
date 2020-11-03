@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokeApiCore
 {
     /// <summary>
-    /// Cleint class to consume PokeAPI
+    /// Client class to consume PokeAPI
     /// https://pokeapi.co/
     /// </summary>
     public class PokeApiClient
@@ -18,24 +19,27 @@ namespace PokeApiCore
         /// </summary>
         /// <exception cref="HttpRequestException"></exception>
         /// <param name="name"></param>
-        /// <returns></returns>
-        public async Task<string> GetPokemonByName(string name)
+        /// <exception cref="ArgumentException">Thrown when Pokemon is not found</exception>
+        /// <returns>Pokemon</returns>
+        public async Task<Pokemon> GetPokemonByName(string name)
         {
-            try
-            {
-                string url = $"https://pokeapi.co/api/v2/pokemon/{name}";
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
-            }
-            catch (HttpRequestException ex)
-            {
+            name = name.ToLower(); // Pokemon name must be lowercase
 
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                throw ex;
+            string url = $"https://pokeapi.co/api/v2/pokemon/{name}";
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Pokemon>(responseBody);
             }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new ArgumentException("{name} does not exist");
+            }
+            else
+            {
+                throw new HttpRequestException();
+            }    
         }
 
         public void GetPokemonById(int id)
