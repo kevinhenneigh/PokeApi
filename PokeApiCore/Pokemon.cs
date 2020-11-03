@@ -27,7 +27,7 @@ namespace PokeApiCore
         public int height
         { 
             //height values are stored as decimeters
-            get =>(int)Math.Ceiling(height1 *  InchesPerDecimeter); 
+            get =>(int) Math.Ceiling(height1 *  InchesPerDecimeter); 
             set => height1 = value; 
         }
         /// <summary>
