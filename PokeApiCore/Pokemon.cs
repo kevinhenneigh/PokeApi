@@ -7,7 +7,7 @@ namespace PokeApiCore
 
     public class Pokemon
     {
-        private const double InchesPerDecimeter = 3.397;
+        private const double InchesPerDecimeter = 3.937;
         private const double PoundsPerHectogram = 0.22046;
         private int height1;
         private int _weight;
@@ -27,7 +27,7 @@ namespace PokeApiCore
         public int height
         { 
             //height values are stored as decimeters
-            get =>(int) Math.Ceiling(height1 *  InchesPerDecimeter); 
+            get =>(int)Math.Ceiling(height1 *  InchesPerDecimeter); 
             set => height1 = value; 
         }
         /// <summary>
