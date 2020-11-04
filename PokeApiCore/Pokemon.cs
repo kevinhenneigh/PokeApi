@@ -15,8 +15,8 @@ namespace PokeApiCore
         /// <summary>
         /// Represents a single Pokemon
         /// </summary>
-        public int id { get; set; }
-        public string name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// The base experience gained from defeating this Pokemon
         /// </summary>
@@ -24,7 +24,7 @@ namespace PokeApiCore
         /// <summary>
         /// The height of this Pokemon in inches
         /// </summary>
-        public int height
+        public int Height
         { 
             //height values are stored as decimeters
             get =>(int) Math.Ceiling(height1 *  InchesPerDecimeter); 
@@ -38,7 +38,7 @@ namespace PokeApiCore
         /// <summary>
         /// The weight of this Pokemon in pounds
         /// </summary>
-        public int weight
+        public int Weight
         {
             get =>(int) Math.Ceiling(_weight * PoundsPerHectogram); 
             set => _weight = value; 
