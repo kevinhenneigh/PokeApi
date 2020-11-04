@@ -12,7 +12,15 @@ namespace PokeApiCore
     /// </summary>
     public class PokeApiClient
     {
-        static readonly HttpClient client = new HttpClient();
+        static readonly HttpClient client;
+
+        static PokeApiClient()
+        {
+            client = new HttpClient();
+            // Must end base address with a forward slash
+            client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+            client.DefaultRequestHeaders.Add("User-Agent", "Kevin's PokeAPI");
+        }
 
         /// <summary>
         /// Retrieve Pokemon by Name
@@ -29,7 +37,7 @@ namespace PokeApiCore
 
         private static async Task<Pokemon> GetPokemonByNameOrId(string name)
         {
-            string url = $"https://pokeapi.co/api/v2/pokemon/{name}";
+            string url = $"pokemon/{name}";
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
