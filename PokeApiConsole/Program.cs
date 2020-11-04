@@ -14,10 +14,10 @@ namespace PokeApiConsole
             {
                 // Pokemon result = await client.GetPokemonByName("bulbasaur");
                 Pokemon result = await client.GetPokemonById(1);
-                Console.WriteLine($"Pokemon Id: {result.id}" +
-                    $"\nName: {result.name}" +
-                    $"\nHeight (in inches): {result.height}" +
-                    $"\nWeight (in pounds): {result.weight}");
+                Console.WriteLine($"Pokemon Id: {result.Id}" +
+                    $"\nName: {result.Name}" +
+                    $"\nHeight (in inches): {result.Height}" +
+                    $"\nWeight (in pounds): {result.Weight}");
 
             }
             catch (ArgumentException)
