@@ -24,18 +24,8 @@ namespace PokeAPIWebsite.Controllers
             int desiredId = 1;
 
             Pokemon result = await PokeAPIHelper.GetById(desiredId);
+            PokedexEntryViewModel entry = PokeAPIHelper.GetPokedexEntryFromPokemon(result);
 
-            var entry = new PokedexEntryViewModel()
-            {
-                Id = result.Id,
-                Name = result.Name,
-                Height = result.Height.ToString(),
-                Weight = result.Weight.ToString(),
-                PokedexImageUrl = result.sprites.front_default,
-                MoveList = result.moves
-                    .OrderBy(m => m.move.name)
-                    .Select(m => m.move.name).ToArray()
-        };
             return View(entry);
         }
 
