@@ -19,9 +19,10 @@ namespace PokeAPIWebsite.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            int desiredId = 1;
+            int desiredId = id ?? 1;
+            ViewData["Id"] = desiredId;
 
             Pokemon result = await PokeAPIHelper.GetById(desiredId);
             PokedexEntryViewModel entry = PokeAPIHelper.GetPokedexEntryFromPokemon(result);
@@ -29,6 +30,7 @@ namespace PokeAPIWebsite.Controllers
             return View(entry);
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
